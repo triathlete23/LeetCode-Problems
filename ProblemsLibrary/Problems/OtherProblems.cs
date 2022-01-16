@@ -812,6 +812,14 @@ namespace ProblemsLibrary.Problems
             return Math.Min(MinDepth(root.left), MinDepth(root.right)) + 1;
         }
 
+        public static bool HasPathSum(this TreeNode root, int targetSum)
+        {
+            if (root == null) return false;
 
+            targetSum -= root.val;
+            if (root.left == null && root.right == null) return targetSum == 0;
+
+            return root.left.HasPathSum(targetSum) || root.right.HasPathSum(targetSum);
+        }
     }
 }

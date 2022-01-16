@@ -1196,5 +1196,47 @@ namespace Tests
                     null, new TreeNode(6)))));
             Assert.AreEqual(5, tree.MinDepth());
         }
+
+        [TestMethod]
+        public void HasPathSumTest1()
+        {
+            var tree = new TreeNode(5,
+                new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)),
+                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1)))));
+
+            Assert.IsTrue(tree.HasPathSum(22));
+        }
+
+        [TestMethod]
+        public void HasPathSumTest2()
+        {
+            var tree = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+
+            Assert.IsFalse(tree.HasPathSum(5));
+        }
+
+        [TestMethod]
+        public void HasPathSumTest3()
+        {
+            Assert.IsFalse(((TreeNode)null).HasPathSum(0));
+        }
+
+        [TestMethod]
+        public void HasPathSumTest4()
+        {
+            var tree = new TreeNode(-2, null, new TreeNode(-3));
+
+            Assert.IsTrue(tree.HasPathSum(-5));
+        }
+
+        [TestMethod]
+        public void HasPathSumTest5()
+        {
+            var tree = new TreeNode(8, 
+                new TreeNode(9), 
+                new TreeNode(-6, new TreeNode(5), new TreeNode(9)));
+
+            Assert.IsTrue(tree.HasPathSum(7));
+        }
     }
 }
