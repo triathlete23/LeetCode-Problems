@@ -821,5 +821,30 @@ namespace ProblemsLibrary.Problems
 
             return root.left.HasPathSum(targetSum) || root.right.HasPathSum(targetSum);
         }
+
+        public static IList<IList<int>> Generate(int numRows)
+        {
+            var list = new List<IList<int>>();
+            for (var i = 0; i < numRows; i++)
+            {
+                var curr = new int[i + 1];
+                if (curr.Length > 1)
+                {
+                    curr[0] = list[i - 1][0];
+                    curr[curr.Length - 1] = list[i - 1][list[i - 1].Count - 1];
+                    for (var j = 1; j < curr.Length - 1; j++)
+                    {
+                        curr[j] = list[i - 1][j - 1] + list[i - 1][j];
+                    }
+                }
+                else
+                {
+                    curr[0] = 1;
+                }
+
+                list.Add(curr);
+            }
+            return list;
+        }
     }
 }

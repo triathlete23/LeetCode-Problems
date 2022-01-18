@@ -1238,5 +1238,31 @@ namespace Tests
 
             Assert.IsTrue(tree.HasPathSum(7));
         }
+
+        [TestMethod]
+        public void GenerateTest1()
+        {
+            var result = new List<IList<int>>
+            {
+                new List<int>{1},
+                new List<int>{1,1},
+                new List<int>{1,2,1},
+                new List<int>{1,3,3,1},
+                new List<int>{1,4,6,4,1}
+            };
+
+            Assert.ReferenceEquals(result, OtherProblems.Generate(5));
+        }
+
+        [TestMethod]
+        public void GenerateTest2()
+        {
+            var result = new List<IList<int>>
+            {
+                new List<int> { 1 }
+            };
+
+            Assert.ReferenceEquals(result, OtherProblems.Generate(1));
+        }
     }
 }
