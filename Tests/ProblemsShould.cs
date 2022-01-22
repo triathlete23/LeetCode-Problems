@@ -1264,5 +1264,29 @@ namespace Tests
 
             Assert.ReferenceEquals(result, OtherProblems.Generate(1));
         }
+
+        //[TestMethod]
+        //public void MaxProfitTest()
+        //{
+        //    Assert.AreEqual(5, OtherProblems.MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
+        //}
+
+        //[TestMethod]
+        //public void MaxProfitTest1()
+        //{
+        //    Assert.AreEqual(0, OtherProblems.MaxProfit(new int[] { 7, 6, 4, 3, 1 }));
+        //}
+
+        [TestMethod]
+        public void TrapTest1()
+        {
+            Assert.AreEqual(6, OtherProblems.Trap(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }));
+        }
+
+        [TestMethod]
+        public void TrapTest2()
+        {
+            Assert.AreEqual(9, OtherProblems.Trap(new int[] { 4, 2, 0, 3, 2, 5 }));
+        }
     }
 }

@@ -846,5 +846,48 @@ namespace ProblemsLibrary.Problems
             }
             return list;
         }
+
+        public static int MaxProfit(int[] prices)
+        {
+            if (prices == null || prices.Length < 2) return 0;
+
+            var max = prices[1];
+            var j = 0;
+            for (var i = 2; i < prices.Length; i++)
+            {
+
+            }
+
+            return 0; // TO REMOVE
+        }
+
+        public static int Trap(int[] height)
+        {
+            if (height.Length == 0) return 0;
+
+            var i = 0;
+            var j = height.Length - 1;
+            var leftMax = height[i];
+            var rightMax = height[j];
+            var res = 0;
+            
+            // [4,2,0,3,2,5]
+            while (i <= j) // i: 6, j: 5, res: 9
+            {
+                if (leftMax <= rightMax) // lM: 5, rM: 5
+                {
+                    leftMax = Math.Max(leftMax, height[i]); // lm: 4, curr: 5
+                    res += leftMax - height[i]; // 0
+                    i++; // 6
+                }
+                else
+                {
+                    rightMax = Math.Max(rightMax, height[j]);
+                    res += rightMax - height[j]; 
+                    j--;                    
+                }
+            }
+            return res;
+        }
     }
 }
