@@ -889,5 +889,22 @@ namespace ProblemsLibrary.Problems
             }
             return res;
         }
+
+        public static int MaxProfit(int[] prices)
+        {
+            if (prices == null || prices.Length < 2) return 0;
+
+            var min = prices[0];
+            var max = int.MinValue;
+
+            for (var i = 0; i < prices.Length; i++)
+            {
+                int diff = prices[i] - min;
+                if (diff > max) max = diff;
+                if (prices[i] < min) min = prices[i];
+            }
+
+            return max;
+        }
     }
 }

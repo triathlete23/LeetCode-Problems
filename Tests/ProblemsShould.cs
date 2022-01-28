@@ -1288,5 +1288,36 @@ namespace Tests
         {
             Assert.AreEqual(9, OtherProblems.Trap(new int[] { 4, 2, 0, 3, 2, 5 }));
         }
+
+        [TestMethod]
+        public void MaxProfitTest()
+        {
+            Assert.AreEqual(5, OtherProblems.MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
+        }
+
+        [TestMethod]
+        public void MaxProfitTest1()
+        {
+            Assert.AreEqual(0, OtherProblems.MaxProfit(new int[] { 7, 6, 4, 3, 1 }));
+        }
+
+        [TestMethod]
+        public void MaxProfitTest2()
+        {
+            Assert.AreEqual(0, OtherProblems.MaxProfit(new int[] { 7, 6 }));
+            Assert.AreEqual(0, OtherProblems.MaxProfit(new int[] { 6, 6 }));
+        }
+
+        [TestMethod]
+        public void MaxProfitTest3()
+        {
+            Assert.AreEqual(3, OtherProblems.MaxProfit(new int[] { 1,4,2 }));
+        }
+
+        [TestMethod]
+        public void MaxProfitTest4()
+        {
+            Assert.AreEqual(4, OtherProblems.MaxProfit(new int[] { 3, 2, 6, 5, 0, 3 }));
+        }
     }
 }
