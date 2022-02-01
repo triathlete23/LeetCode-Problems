@@ -1290,6 +1290,18 @@ namespace Tests
         }
 
         [TestMethod]
+        public void PileOfStonesTest1()
+        {
+            Assert.AreEqual("Bob", OtherProblems.PileOfStones(new int[] { 1, 2, 3, 7 }));
+        }
+
+        [TestMethod]
+        public void PileOfStonesTest2()
+        {
+            Assert.AreEqual("Alice", OtherProblems.PileOfStones(new int[] { 1, 2, 3, -9 }));
+        }
+
+        [TestMethod]
         public void MaxProfitTest()
         {
             Assert.AreEqual(5, OtherProblems.MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));

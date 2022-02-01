@@ -890,6 +890,37 @@ namespace ProblemsLibrary.Problems
             return res;
         }
 
+        private static int[] dp;
+        public static string PileOfStones(int[] values)
+        {
+            if (values.Length == 0) return null;
+            dp = new int[values.Length];
+            for (var i = 0; i < dp.Length; i++)
+            {
+                dp[i] = int.MinValue;
+            }
+
+            var aliceScore = FindScore(values, 0);
+            return aliceScore > 0 ? "Alice" : aliceScore < 0 ? "Bob" : "Tie";
+        }
+
+        private static int FindScore(int[] values, int i)
+        {
+            if (i == values.Length) return 0;
+            if (dp[i] > int.MinValue)
+            {
+                return dp[i];
+            }
+
+            var sum = 0;
+            for (var j = i; j < i + 3 && j < values.Length; j++)
+            {
+                sum += values[j];
+                dp[i] = Math.Max(dp[i], sum - FindScore(values, j));
+            }
+            return dp[i];
+        }
+
         public static int MaxProfit(int[] prices)
         {
             if (prices == null || prices.Length < 2) return 0;
