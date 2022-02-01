@@ -760,7 +760,6 @@ namespace Tests
             var arr = new int[] { 1, 3, 5, 6 };
             Assert.AreEqual(1, arr.SearchInsert(2));
         }
-
         
         [TestMethod]
         public void SearchInsertTest3()
@@ -1263,19 +1262,7 @@ namespace Tests
             };
 
             Assert.ReferenceEquals(result, OtherProblems.Generate(1));
-        }
-
-        //[TestMethod]
-        //public void MaxProfitTest()
-        //{
-        //    Assert.AreEqual(5, OtherProblems.MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
-        //}
-
-        //[TestMethod]
-        //public void MaxProfitTest1()
-        //{
-        //    Assert.AreEqual(0, OtherProblems.MaxProfit(new int[] { 7, 6, 4, 3, 1 }));
-        //}
+        }        
 
         [TestMethod]
         public void TrapTest1()
@@ -1330,6 +1317,24 @@ namespace Tests
         public void MaxProfitTest4()
         {
             Assert.AreEqual(4, OtherProblems.MaxProfit(new int[] { 3, 2, 6, 5, 0, 3 }));
+        }
+
+        [TestMethod]
+        public void ContainsDuplicateTest1()
+        {
+            Assert.IsTrue(OtherProblems.ContainsDuplicate(new int[] { 1, 2, 3, 1 }));
+        }
+
+        [TestMethod]
+        public void ContainsDuplicateTest2()
+        {
+            Assert.IsFalse(OtherProblems.ContainsDuplicate(new int[] { 1, 2, 3, 4 }));
+        }
+
+        [TestMethod]
+        public void ContainsDuplicateTest3()
+        {
+            Assert.IsTrue(OtherProblems.ContainsDuplicate(new int[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 }));
         }
     }
 }

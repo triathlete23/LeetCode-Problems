@@ -845,21 +845,7 @@ namespace ProblemsLibrary.Problems
                 list.Add(curr);
             }
             return list;
-        }
-
-        public static int MaxProfit(int[] prices)
-        {
-            if (prices == null || prices.Length < 2) return 0;
-
-            var max = prices[1];
-            var j = 0;
-            for (var i = 2; i < prices.Length; i++)
-            {
-
-            }
-
-            return 0; // TO REMOVE
-        }
+        }        
 
         public static int Trap(int[] height)
         {
@@ -936,6 +922,20 @@ namespace ProblemsLibrary.Problems
             }
 
             return max;
+        }
+
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            var hashSet = new HashSet<int>();
+            for (var i = 0;i < nums.Length; i++)
+            {
+                if (hashSet.Contains(nums[i]))
+                {
+                    return true;
+                }
+                hashSet.Add(nums[i]);
+            }
+            return false;
         }
     }
 }
