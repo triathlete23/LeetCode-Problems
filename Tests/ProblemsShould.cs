@@ -1336,5 +1336,17 @@ namespace Tests
         {
             Assert.IsTrue(OtherProblems.ContainsDuplicate(new int[] { 1, 1, 1, 3, 3, 4, 3, 2, 4, 2 }));
         }
+
+        [TestMethod]
+        public void ProductExceptSelfTest1()
+        {
+            Assert.IsTrue(new int[] { 24, 12, 8, 6 }.SequenceEqual(OtherProblems.ProductExceptSelf(new int[] { 1, 2, 3, 4 })));
+        }
+
+        [TestMethod]
+        public void ProductExceptSelfTest2()
+        {
+            Assert.IsTrue(new int[] { 0, 0, 9, 0, 0 }.SequenceEqual(OtherProblems.ProductExceptSelf(new int[] { -1, 1, 0, -3, 3 })));
+        }
     }
 }

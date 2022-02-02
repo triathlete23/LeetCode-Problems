@@ -937,5 +937,33 @@ namespace ProblemsLibrary.Problems
             }
             return false;
         }
+
+        public static int[] ProductExceptSelf(int[] nums)
+        {
+            var left = new int[nums.Length];
+            left[0] = 1;
+            
+            var right = new int[nums.Length];
+            right[right.Length - 1] = 1;
+            
+            var res = new int[nums.Length];
+
+            for (var i = 1; i < nums.Length; i++)
+            {
+                left[i] = nums[i - 1] * left[i - 1];
+            }
+
+            for (var j=nums.Length - 2; j >= 0; j--)
+            {
+                right[j] = nums[j + 1] * right[j + 1];
+            }
+
+            for (var i = 0; i < nums.Length; i++)
+            {
+                res[i] = left[i] * right[i];
+            }
+
+            return res;
+        }
     }
 }
