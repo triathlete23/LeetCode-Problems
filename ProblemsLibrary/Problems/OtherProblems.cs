@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using ProblemsLibrary.Problems.Helpers;
 
 namespace ProblemsLibrary.Problems
@@ -599,7 +596,7 @@ namespace ProblemsLibrary.Problems
             double init = x;
             double y = 1;
 
-            double e = 0.000001;
+            double e = 0.0001;
             while (init - y > e)
             {
                 init = (init + y) / 2;
@@ -965,5 +962,23 @@ namespace ProblemsLibrary.Problems
 
             return res;
         }
-    }
+
+        public static int MaxProduct(int[] nums) // -2, 0, -1
+        {
+            if (nums.Length == 1) return nums[0];
+
+            var res = nums[0]; //0
+            var max = res;
+            var min = res;//0
+            for (var i = 1; i < nums.Length; i++) //-1
+            {
+                var a = max * nums[i];
+                var b = min * nums[i];
+                max = Math.Max(Math.Max(a, b), nums[i]);
+                min = Math.Min(Math.Min(a, b), nums[i]);
+                res = Math.Max(res, max);
+            }
+            return res;
+        }
+    }    
 }

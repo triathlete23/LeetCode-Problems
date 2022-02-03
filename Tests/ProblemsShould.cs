@@ -1276,17 +1276,17 @@ namespace Tests
             Assert.AreEqual(9, OtherProblems.Trap(new int[] { 4, 2, 0, 3, 2, 5 }));
         }
 
-        [TestMethod]
-        public void PileOfStonesTest1()
-        {
-            Assert.AreEqual("Bob", OtherProblems.PileOfStones(new int[] { 1, 2, 3, 7 }));
-        }
+        //[TestMethod]
+        //public void PileOfStonesTest1()
+        //{
+        //    Assert.AreEqual("Bob", OtherProblems.PileOfStones(new int[] { 1, 2, 3, 7 }));
+        //}
 
-        [TestMethod]
-        public void PileOfStonesTest2()
-        {
-            Assert.AreEqual("Alice", OtherProblems.PileOfStones(new int[] { 1, 2, 3, -9 }));
-        }
+        //[TestMethod]
+        //public void PileOfStonesTest2()
+        //{
+        //    Assert.AreEqual("Alice", OtherProblems.PileOfStones(new int[] { 1, 2, 3, -9 }));
+        //}
 
         [TestMethod]
         public void MaxProfitTest()
@@ -1347,6 +1347,42 @@ namespace Tests
         public void ProductExceptSelfTest2()
         {
             Assert.IsTrue(new int[] { 0, 0, 9, 0, 0 }.SequenceEqual(OtherProblems.ProductExceptSelf(new int[] { -1, 1, 0, -3, 3 })));
+        }
+
+        [TestMethod]
+        public void MaxProduct1()
+        {
+            Assert.AreEqual(6, OtherProblems.MaxProduct(new int[] { 2, 3, -2, 4 }));
+        }
+
+        [TestMethod]
+        public void MaxProduct2()
+        {
+            Assert.AreEqual(0, OtherProblems.MaxProduct(new int[] { -2, 0, -1 }));
+        }
+
+        [TestMethod]
+        public void MaxProduct3()
+        {
+            Assert.AreEqual(2, OtherProblems.MaxProduct(new int[] { 0, 2 }));
+        }
+
+        [TestMethod]
+        public void MaxProduct4()
+        {
+            Assert.AreEqual(24, OtherProblems.MaxProduct(new int[] { -2, 3, -4 }));
+        }
+        
+        [TestMethod]
+        public void MaxProduct5()
+        {
+            Assert.AreEqual(1, OtherProblems.MaxProduct(new int[] { -3, 0, 1, -2 }));
+        }
+
+        [TestMethod]
+        public void MaxProduct6()
+        {
+            Assert.AreEqual(24, OtherProblems.MaxProduct(new int[] { 2, -5, -2, -4, 3 }));
         }
     }
 }
