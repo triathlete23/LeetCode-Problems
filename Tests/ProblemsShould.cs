@@ -1384,5 +1384,41 @@ namespace Tests
         {
             Assert.AreEqual(24, OtherProblems.MaxProduct(new int[] { 2, -5, -2, -4, 3 }));
         }
+
+        [TestMethod]
+        public void FindMinTest1()
+        {
+            Assert.AreEqual(1, OtherProblems.FindMin(new int[] { 3, 4, 5, 1, 2 }));
+        }
+
+        [TestMethod]
+        public void FindMinTest2()
+        {
+            Assert.AreEqual(0, OtherProblems.FindMin(new int[] { 4, 5, 6, 7, 0, 1, 2 }));
+        }
+
+        [TestMethod]
+        public void FindMinTest3()
+        {
+            Assert.AreEqual(11, OtherProblems.FindMin(new int[] { 11, 13, 15, 17 }));
+        }
+
+        [TestMethod]
+        public void FindMinTest4()
+        {
+            Assert.AreEqual(0, OtherProblems.FindMin(new int[] { 1, 2, 3, 4, 5, 6, 7, 0 }));
+        }
+
+        [TestMethod]
+        public void FindMinTest5()
+        {
+            Assert.AreEqual(0, OtherProblems.FindMin(new int[] { 2, 3, 4, 5, 6, 7, 0, 1 }));
+        }
+
+        [TestMethod]
+        public void FindMinTest6()
+        {
+            Assert.AreEqual(1, OtherProblems.FindMin(new int[] { 5, 1, 2, 3, 4 }));
+        }
     }
 }

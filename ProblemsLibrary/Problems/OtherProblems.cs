@@ -963,14 +963,14 @@ namespace ProblemsLibrary.Problems
             return res;
         }
 
-        public static int MaxProduct(int[] nums) // -2, 0, -1
+        public static int MaxProduct(int[] nums)
         {
             if (nums.Length == 1) return nums[0];
 
-            var res = nums[0]; //0
+            var res = nums[0]; 
             var max = res;
-            var min = res;//0
-            for (var i = 1; i < nums.Length; i++) //-1
+            var min = res;
+            for (var i = 1; i < nums.Length; i++)
             {
                 var a = max * nums[i];
                 var b = min * nums[i];
@@ -979,6 +979,53 @@ namespace ProblemsLibrary.Problems
                 res = Math.Max(res, max);
             }
             return res;
+        }
+
+        public static int FindMinSimple(int[] nums) // O(n)
+        {
+            if (nums.Length == 1) return nums[0];
+
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (nums[i - 1] < nums[i]) continue;
+                else return nums[i];
+            }
+
+            return nums.First();
+        }
+
+        public static int FindMin(int[] nums) // O(log n)
+        {
+            if (nums.Length == 1) return nums[0];
+
+            if (nums.First() < nums.Last()) return nums[0];
+
+            var left = 0; 
+            var right = nums.Length - 1;
+            while (left < right) // left: 0, right: 4
+            {
+                var mid = (left + right) / 2; // mid: 2
+                if (nums[mid-1] > nums[mid]) // mid-1: 1, mid: 2
+                {
+                    return nums[mid];
+                }
+
+                if (nums[mid + 1] < nums[mid]) // mid: 2, mid+1: 3
+                {
+                    return nums[mid + 1];
+                }
+
+                if (nums[mid] > nums[left]) // mid: 2, left: 5
+                {
+                    left = mid;
+                }
+                else
+                {
+                    right = mid;
+                }
+            }
+
+            return nums[0];
         }
     }    
 }
