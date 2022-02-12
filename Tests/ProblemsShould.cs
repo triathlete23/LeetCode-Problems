@@ -1420,5 +1420,35 @@ namespace Tests
         {
             Assert.AreEqual(1, OtherProblems.FindMin(new int[] { 5, 1, 2, 3, 4 }));
         }
+
+        [TestMethod]
+        public void SearchTest1()
+        {
+            Assert.AreEqual(4, OtherProblems.Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 0)); // -
+        }
+
+        [TestMethod]
+        public void SearchTest2()
+        {
+            Assert.AreEqual(-1, OtherProblems.Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 3)); // right
+        }
+
+        [TestMethod]
+        public void SearchTest3()
+        {
+            Assert.AreEqual(-1, OtherProblems.Search(new int[] { 1 }, 0));
+        }
+
+        [TestMethod]
+        public void SearchTest4()
+        {
+            Assert.AreEqual(1, OtherProblems.Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 5)); // right, left
+        }
+
+        [TestMethod]
+        public void SearchTest5()
+        {
+            Assert.AreEqual(4, OtherProblems.Search(new int[] { 4, 5, 6, 7, 8, 1, 2, 3 }, 8)); // right, left, mid
+        }
     }
 }
