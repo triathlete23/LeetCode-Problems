@@ -1075,5 +1075,51 @@ namespace ProblemsLibrary.Problems
 
             return -1;
         }
+
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            if (nums.Length < 2) return new List<int>[0];
+            Array.Sort(nums);
+
+            // -4, -1, -1, 0, 1, 2
+            var res = new List<IList<int>>();
+            for (var i = 0; i < nums.Length - 2; i++)//looking for triplets, exclude last 2 numbers
+            {
+                // i, low, _, _, _, high
+                // -4, -1, -1, 0, 1, 2
+
+                //i: 3
+                //nums[i]: 0
+
+                if (i > 0 && nums[i] == nums[i - 1]) continue;
+                
+                var low = i + 1; //4, nums[low]: 1
+                var high = nums.Length - 1; // 5, nums[high]: 2
+                var sum = -nums[i]; //1
+
+                while (low < high) //1<5
+                {
+                    if (nums[low] + nums[high] == sum)  //1 == 1
+                    {
+                        // [[-1, -1, 2]]
+                        res.Add(new int[] { nums[i], nums[low], nums[high] });
+                        while (low < high && nums[low] == nums[low + 1]) low++;
+                        while (low < high && nums[high - 1] == nums[high]) high--;
+                        low++;
+                        high--;
+                    }
+                    else if (nums[low] + nums[high] > sum)
+                    {
+                        high--;
+                    }
+                    else
+                    {
+                        low++;
+                    }
+                }
+            }
+
+            return res;
+        }
     }    
 }

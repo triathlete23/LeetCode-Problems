@@ -1450,5 +1450,40 @@ namespace Tests
         {
             Assert.AreEqual(4, OtherProblems.Search(new int[] { 4, 5, 6, 7, 8, 1, 2, 3 }, 8)); // right, left, mid
         }
+
+        [TestMethod]
+        public void ThreeSumTest()
+        {
+            var expectedResult = new List<IList<int>>
+            {
+                new int[]{ -1, -1, 2 },
+                new int[]{ -1, 0, 1 }
+            };
+            var res = OtherProblems.ThreeSum(new int[] { -1, 0, 1, 2, -1, -4 });
+            Assert.IsTrue(expectedResult.All(arr => res.Any(el => el.Count == arr.Count && el.All(x => arr.Contains(x)))));
+        }
+
+        [TestMethod]
+        public void ThreeSumTest1()
+        {
+            Assert.IsFalse(OtherProblems.ThreeSum(new int[0]).Any());
+        }
+
+        [TestMethod]
+        public void ThreeSumTest2()
+        {
+            Assert.IsFalse(OtherProblems.ThreeSum(new int[] { 0 }).Any());
+        }
+
+        [TestMethod]
+        public void ThreeSumTest3()
+        {
+            var expectedResult = new List<IList<int>>
+            {
+                new int[]{ 0,0,0 }
+            };
+            var res = OtherProblems.ThreeSum(new int[] { 0, 0, 0 });
+            Assert.IsTrue(expectedResult.All(arr => res.Any(el => el.Count == arr.Count && el.All(x => arr.Contains(x)))));
+        }
     }
 }
