@@ -541,6 +541,20 @@ namespace Tests
         }
 
         [TestMethod]
+        public void IsPalindromeTest9()
+        {
+            var x = 88888;
+            Assert.IsTrue(x.IsPalindrome());
+        }
+        
+        [TestMethod]
+        public void IsPalindromeTest10()
+        {
+            var x = 1000021;
+            Assert.IsFalse(x.IsPalindrome());
+        }
+
+        [TestMethod]
         public void RomanToIntTest1()
         {
             var s = "III";
@@ -651,6 +665,20 @@ namespace Tests
             var s = "){";
             Assert.AreEqual(false, s.IsValid());
         }
+        
+        [TestMethod]
+        public void IsValidTest7()
+        {
+            var s = "(])";
+            Assert.AreEqual(false, s.IsValid());
+        }
+        
+        [TestMethod]
+        public void IsValidTest8()
+        {
+            var s = "[])";
+            Assert.AreEqual(false, s.IsValid());
+        }
 
         [TestMethod]
         public void MergeTwoListsTest1()
@@ -687,13 +715,17 @@ namespace Tests
         [TestMethod]
         public void RemoveDuplicatesTest1()
         {
-            Assert.AreEqual(2, OtherProblems.RemoveDuplicates(new int[] { 1, 1, 2 }));
+            var arr = new int[] { 1, 1, 2 };
+            Assert.AreEqual(2, arr.RemoveDuplicates());
+            CollectionAssert.AreEqual(new int[] { 1, 2, 2 }, arr);
         }
 
         [TestMethod]
         public void RemoveDuplicatesTest2()
         {
-            Assert.AreEqual(5, OtherProblems.RemoveDuplicates(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }));
+            var arr = new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+            Assert.AreEqual(5, arr.RemoveDuplicates());
+            CollectionAssert.AreEqual(new int[] { 0, 1, 2, 3, 4 }, arr.Take(5).ToArray());
         }
 
         [TestMethod]
@@ -701,22 +733,26 @@ namespace Tests
         {
             var arr = new int[] { 3, 2, 2, 3 };
             Assert.AreEqual(2, arr.RemoveElement(3));
-            Assert.AreEqual(2, arr[0]);
-            Assert.AreEqual(2, arr[1]);
+            CollectionAssert.AreEqual(new int[] { 2, 2 }, arr.Take(2).ToArray());
         }
 
         [TestMethod]
         public void RemoveElementTest2()
         {
             var arr = new int[] { 0, 1, 2, 2, 3, 0, 4, 2 };
-            var res = new int[] { 0, 1, 4, 0, 3 };
+            var res = new int[] { 0, 1, 3, 0, 4 };
             Assert.AreEqual(5, arr.RemoveElement(2));
-            Assert.IsTrue(arr.Contains(0));
-            Assert.IsTrue(arr.Contains(1));
-            Assert.IsTrue(arr.Contains(4));
-            Assert.IsTrue(arr.Contains(3));
+            CollectionAssert.AreEquivalent(res, arr.Take(5).ToArray());
         }
-        
+
+        [TestMethod]
+        public void RemoveElementTest3()
+        {
+            var arr = new int[] { 1 };
+            Assert.AreEqual(1, arr.RemoveElement(1));
+            CollectionAssert.AreEqual(new int[] { }, arr);
+        }
+
         [TestMethod]
         public void StrStrTest1()
         {
@@ -889,6 +925,17 @@ namespace Tests
         }
 
         [TestMethod]
+        public void PlusOneTest5()
+        {
+            var arr = new int[] { 9, 8, 9 };
+            var res = arr.PlusOne();
+            Assert.AreEqual(9, res[0]);
+            Assert.AreEqual(9, res[1]);
+            Assert.AreEqual(0, res[2]);
+        }
+
+
+        [TestMethod]
         public void AddBinaryTest1()
         {
             Assert.AreEqual("100", OtherProblems.AddBinary("11", "1"));
@@ -937,6 +984,24 @@ namespace Tests
         }
 
         [TestMethod]
+        public void MySqrtTest4()
+        {
+            Assert.AreEqual(1, OtherProblems.MySqrt(1));
+        }
+        
+        [TestMethod]
+        public void MySqrtTest5()
+        {
+            Assert.AreEqual(46339, OtherProblems.MySqrt(2147395599));
+        }
+
+        [TestMethod]
+        public void MySqrtTest6()
+        {
+            Assert.AreEqual(46340, OtherProblems.MySqrt(2147483647));
+        }
+
+        [TestMethod]
         public void ClimbStairsTest1()
         {
             Assert.AreEqual(2, OtherProblems.ClimbStairs(2));
@@ -949,295 +1014,11 @@ namespace Tests
         }
 
         [TestMethod]
-        public void DeleteDuplicatesTest1()
+        public void ClimbStairsTest3()
         {
-            var listNode = new ListNode(1, new ListNode(1, new ListNode(2)));
-            var res = new ListNode(1, new ListNode(2));
-            Assert.AreEqual(res, listNode.DeleteDuplicates());
-        }
-
-        [TestMethod]
-        public void DeleteDuplicatesTest2()
-        {
-            var listNode = new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(2, new ListNode(3, new ListNode(3))))));
-            var res = new ListNode(1, new ListNode(2, new ListNode(3)));
-            Assert.AreEqual(res, listNode.DeleteDuplicates());
-        }
-
-        [TestMethod]
-        public void MergeTest1()
-        {
-            var nums1 = new int[] { 1, 2, 3, 0, 0, 0 };
-            var nums2 = new int[] { 2, 5, 6 };
-            var res = new int[] { 1, 2, 2, 3, 5, 6 };
-            nums1.Merge(3, nums2, 3);
-            Assert.IsTrue(nums1.SequenceEqual(res));
-        }
-
-        [TestMethod]
-        public void MergeTest2()
-        {
-            var nums1 = new int[] { 1 };
-            var nums2 = new int[0];
-            var res = new int[] { 1 };
-            nums1.Merge(1, nums2, 0);
-            Assert.IsTrue(nums1.SequenceEqual(res));
-        }
-
-        //[TestMethod]
-        //public void MergeTest3()
-        //{
-        //    var nums1 = new int[0];
-        //    var nums2 = new int[] { 1 };
-        //    var res = new int[] { 1 };
-        //    nums1.Merge(0, nums2, 1);
-        //    Assert.IsTrue(nums1.SequenceEqual(res));
-        //}
-
-        [TestMethod]
-        public void InorderTraversalTest1()
-        {
-            var res = new List<int> { 1, 3, 2 };
-            var tree = new TreeNode(1, null, new TreeNode(2, new TreeNode(3)));
-            Assert.IsTrue(res.SequenceEqual(tree.InorderTraversal()));
-        }
-
-        [TestMethod]
-        public void InorderTraversalTest2()
-        {
-            var res = new List<int>();
-            TreeNode tree = null;
-            Assert.IsTrue(res.SequenceEqual(tree.InorderTraversal()));
-        }
-
-        [TestMethod]
-        public void InorderTraversalTest3()
-        {
-            var res = new List<int> { 1 };
-            var tree = new TreeNode(1);
-            Assert.IsTrue(res.SequenceEqual(tree.InorderTraversal()));
-        }
-
-        [TestMethod]
-        public void IsSameTreeTest1()
-        {
-            var first = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-            var second = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-            Assert.IsTrue(first.IsSameTree(second));
-        }
-
-        [TestMethod]
-        public void IsSameTreeTest2()
-        {
-            var first = new TreeNode(1, new TreeNode(2));
-            var second = new TreeNode(1, null, new TreeNode(3));
-            Assert.IsFalse(first.IsSameTree(second));
-        }
-
-        [TestMethod]
-        public void IsSameTreeTest3()
-        {
-            var first = new TreeNode(1, new TreeNode(2), new TreeNode(1));
-            var second = new TreeNode(1, new TreeNode(1), new TreeNode(2));
-            Assert.IsFalse(first.IsSameTree(second));
-        }
-
-        [TestMethod]
-        public void IsSameTreeTest4()
-        {
-            var first = new TreeNode(1, new TreeNode(1));
-            var second = new TreeNode(1, null, new TreeNode(1));
-            Assert.IsFalse(first.IsSameTree(second));
-        }
-
-        [TestMethod]
-        public void IsSymmetricTest1()
-        {
-            var root = new TreeNode(1,
-                new TreeNode(2, new TreeNode(3), new TreeNode(4)),
-                new TreeNode(2, new TreeNode(4), new TreeNode(3)));
-
-            Assert.IsTrue(root.IsSymmetric());
-        }
-
-        [TestMethod]
-        public void IsSymmetricTest2()
-        {
-            var root = new TreeNode(1,
-                new TreeNode(2, null, new TreeNode(3)),
-                new TreeNode(2, null, new TreeNode(3)));
-
-            Assert.IsFalse(root.IsSymmetric());
-        }
-
-        [TestMethod]
-        public void IsSymmetricTest3()
-        {
-            TreeNode root = null;
-            Assert.IsTrue(root.IsSymmetric());
-        }
-
-        [TestMethod]
-        public void IsSymmetricTest4()
-        {
-            TreeNode root = new TreeNode(1);
-            Assert.IsTrue(root.IsSymmetric());
-        }
-
-        [TestMethod]
-        public void MaxDepthTest1()
-        {
-            var root = new TreeNode(3, 
-                new TreeNode(9),
-                new TreeNode(20, new TreeNode(15), new TreeNode(7)));
-            Assert.AreEqual(3, root.MaxDepth());
-        }
-
-        [TestMethod]
-        public void MaxDepthTest2()
-        {
-            var root = new TreeNode(1, null, new TreeNode(2));
-            Assert.AreEqual(2, root.MaxDepth());
-        }
-
-        [TestMethod]
-        public void MaxDepthTest3()
-        {
-            var root = new TreeNode(1);
-            Assert.AreEqual(1, root.MaxDepth());
-        }
-
-        [TestMethod]
-        public void MaxDepthTest4()
-        {
-            var root = new TreeNode();
-            Assert.AreEqual(1, root.MaxDepth());
-        }
-
-        //[TestMethod]
-        //public void SortedArrayToBSTTest1()
-        //{
-        //    var nums = new int[] { -10, -3, 0, 5, 9 };
-        //    var expected = new TreeNode(0, 
-        //        new TreeNode(-10, null, new TreeNode(-3)),
-        //        new TreeNode(5, null, new TreeNode(9)));
-        //    var res = nums.SortedArrayToBST();
-        //    Assert.AreEqual(expected, res);
-        //}
-
-        //[TestMethod]
-        //public void SortedArrayToBSTTest2()
-        //{
-        //    var nums = new int[] { 1, 3 };
-        //    var res = new TreeNode(1, null, new TreeNode(3));
-        //    Assert.AreEqual(res, nums.SortedArrayToBST());
-        //}
-
-        //[TestMethod]
-        //public void SortedArrayToBSTTest3()
-        //{
-        //    var nums = new int[] { 0, 1, 2, 3, 4, 5 };
-        //    var res = new TreeNode(3, 
-        //        new TreeNode(1, new TreeNode(2), new TreeNode(4)), 
-        //        new TreeNode(5));
-        //    Assert.AreEqual(res, nums.SortedArrayToBST());
-        //}
-
-        [TestMethod]
-        public void IsBalancedTest1()
-        {
-            var tree = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
-            Assert.IsTrue(tree.IsBalanced());
-        }
-
-        [TestMethod]
-        public void IsBalancedTest2()
-        {
-            var tree = new TreeNode(1, 
-                new TreeNode(2, new TreeNode(3, new TreeNode(4), new TreeNode(4)), new TreeNode(3)),
-                new TreeNode(2));
-            Assert.IsFalse(tree.IsBalanced());
-        }
-
-        [TestMethod]
-        public void IsBalancedTest3()
-        {
-            TreeNode tree = null;
-            Assert.IsTrue(tree.IsBalanced());
-        }
-
-        [TestMethod]
-        public void IsBalancedTest4()
-        {
-            var tree = new TreeNode(1, 
-                new TreeNode(2, new TreeNode(3, new TreeNode(4))),
-                new TreeNode(2, null, new TreeNode(3, null, new TreeNode(4))));
-            Assert.IsFalse(tree.IsBalanced());
-        }
-
-        [TestMethod]
-        public void MinDepthTest1()
-        {
-            var tree = new TreeNode(3,
-                new TreeNode(9),
-                new TreeNode(20, new TreeNode(15), new TreeNode(7)));
-            Assert.AreEqual(2, tree.MinDepth());
-        }
-
-        [TestMethod]
-        public void MinDepthTest2()
-        {
-            var tree = new TreeNode(2,
-                null,
-                new TreeNode(3, 
-                    null, new TreeNode(4, 
-                    null, new TreeNode(5, 
-                    null, new TreeNode(6)))));
-            Assert.AreEqual(5, tree.MinDepth());
-        }
-
-        [TestMethod]
-        public void HasPathSumTest1()
-        {
-            var tree = new TreeNode(5,
-                new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)),
-                new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1)))));
-
-            Assert.IsTrue(tree.HasPathSum(22));
-        }
-
-        [TestMethod]
-        public void HasPathSumTest2()
-        {
-            var tree = new TreeNode(1, new TreeNode(2), new TreeNode(3));
-
-            Assert.IsFalse(tree.HasPathSum(5));
-        }
-
-        [TestMethod]
-        public void HasPathSumTest3()
-        {
-            Assert.IsFalse(((TreeNode)null).HasPathSum(0));
-        }
-
-        [TestMethod]
-        public void HasPathSumTest4()
-        {
-            var tree = new TreeNode(-2, null, new TreeNode(-3));
-
-            Assert.IsTrue(tree.HasPathSum(-5));
-        }
-
-        [TestMethod]
-        public void HasPathSumTest5()
-        {
-            var tree = new TreeNode(8, 
-                new TreeNode(9), 
-                new TreeNode(-6, new TreeNode(5), new TreeNode(9)));
-
-            Assert.IsTrue(tree.HasPathSum(7));
-        }
-
+            Assert.AreEqual(8, OtherProblems.ClimbStairs(5));
+        }   
+        
         [TestMethod]
         public void GenerateTest1()
         {
@@ -1262,7 +1043,28 @@ namespace Tests
             };
 
             Assert.ReferenceEquals(result, OtherProblems.Generate(1));
-        }        
+        }
+
+        [TestMethod]
+        public void GetRowTest1()
+        {
+            var result = new List<int> { 1, 3, 3, 1 };
+            Assert.ReferenceEquals(result, OtherProblems.GetRow(3));
+        }
+
+        [TestMethod]
+        public void GetRowTest2()
+        {
+            var result = new List<int> { 1 };
+            Assert.ReferenceEquals(result, OtherProblems.GetRow(0));
+        }
+
+        [TestMethod]
+        public void GetRowTest3()
+        {
+            var result = new List<int> { 1, 1 };
+            Assert.ReferenceEquals(result, OtherProblems.GetRow(1));
+        }
 
         [TestMethod]
         public void TrapTest1()
@@ -1526,6 +1328,18 @@ namespace Tests
         public void MaxAreaTest6()
         {
             Assert.AreEqual(49, OtherProblems.MaxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
+        }
+
+        [TestMethod]
+        public void GetSumTest()
+        {
+            Assert.AreEqual(3, OtherProblems.GetSum(1, 2));
+        }
+
+        [TestMethod]
+        public void GetSumTest1()
+        {
+            Assert.AreEqual(5, OtherProblems.GetSum(2, 3));
         }
     }
 }

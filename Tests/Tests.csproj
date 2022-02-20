@@ -55,9 +55,11 @@
   <ItemGroup>
     <Compile Include="ArrayProblemsShould.cs" />
     <Compile Include="InterviwProblemsShould.cs" />
+    <Compile Include="ListsProblemsShould.cs" />
     <Compile Include="ProblemsShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SortsShould.cs" />
+    <Compile Include="TreeProblemsShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProblemsLibrary\ProblemsLibrary.csproj">

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProblemsLibrary.Problems.Helpers
 {
@@ -15,7 +17,7 @@ namespace ProblemsLibrary.Problems.Helpers
             this.val = val;
             this.left = left; 
             this.right = right;
-        }
+        }       
     }
 
     public class Height
@@ -54,7 +56,7 @@ namespace ProblemsLibrary.Problems.Helpers
     {
         public int val;
         public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
+        public ListNode(int val = int.MinValue, ListNode next = null)
         {
             this.val = val;
             this.next = next;
@@ -76,6 +78,14 @@ namespace ProblemsLibrary.Problems.Helpers
             if (curr != null || listNode != null) return false;
 
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -903652156;
+            hashCode = hashCode * -1521134295 + val.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<ListNode>.Default.GetHashCode(next);
+            return hashCode;
         }
     }
 }

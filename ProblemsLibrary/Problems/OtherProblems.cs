@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ProblemsLibrary.Problems.Helpers;
 
 namespace ProblemsLibrary.Problems
 {
     public static class OtherProblems
     {
-        public static void Test()
-        {
-            var list = new List<int>(2);
-            list.Add(1);
-            list.Add(1);
-            list.Add(1);
-        }
-
         public static int PowerSum(int X, int N)
         {
             return FindSum(X, N, 1);
@@ -147,202 +140,6 @@ namespace ProblemsLibrary.Problems
             return new List<int> { aliceScore, bobScore };
         }
 
-        public static bool IsPalindrome(this int x)
-        {
-            if (x < 0 || (x > 9 && x % 10 == 0))
-            {
-                return false;
-            }
-
-            int revert = 0;
-            while (x > revert)
-            {
-                revert = revert * 10 + x % 10;
-                x /= 10;
-            }
-
-            return x == revert || x == revert / 10;
-        }
-
-        public static int RomanToInt(this string s)
-        {
-            var alph = new Dictionary<char, int>
-            {
-                { 'I', 1 },
-                { 'V', 5 },
-                { 'X', 10 },
-                { 'L', 50 },
-                { 'C', 100 },
-                { 'D', 500 },
-                { 'M', 1000 }
-            };
-
-            var comb = new Dictionary<string, int>
-            {
-                { "IV", 4 },
-                { "IX", 9 },
-                { "XL", 40 },
-                { "XC", 90 },
-                { "CD", 400 },
-                { "CM", 900 }
-            };
-
-            var res = 0;
-            var prev = 0;
-            for (var i = 0; i < s.Length; i++)
-            {
-                var curr = alph[s[i]];
-                if (prev != 0 && curr > prev)
-                {
-                    var combValue = comb[String.Concat(s[i - 1], s[i])];
-                    res += combValue;
-                    res -= prev;
-                }
-                else
-                {
-                    res += curr;
-                }
-                prev = curr;
-            }
-
-            return res;
-        }
-
-        public static string LongestCommonPrefix(this string[] strs)
-        {
-            if (strs.Length == 0) return string.Empty;
-
-            var prefix = strs[0];
-            for (int i = 1; i < strs.Length; i++)
-            {
-                var j = 0;
-                while (j < Math.Min(prefix.Length, strs[i].Length) && prefix[j] == strs[i][j])
-                {
-                    j++;
-                }
-                prefix = prefix.Substring(0, j);
-            }
-
-            return prefix;
-        }
-
-        public static bool IsValid(this string s)
-        {
-            if (s == "") return true;
-            if (s.Length % 2 == 1) return false;
-
-            var stack = new Stack<char>();
-
-            for (var i = 0; i < s.Length; i++)
-            {
-                if (s[i] == '(')
-                {
-                    stack.Push(')');
-                    continue;
-                }
-
-                if (s[i] == '[')
-                {
-                    stack.Push(']');
-                    continue;
-                }
-
-                if (s[i] == '{')
-                {
-                    stack.Push('}');
-                    continue;
-                }
-
-                if ((!stack.Any() && (s[i] == ')' || s[i] == ']' || s[i] == '}')) || s[i] != stack.Pop()) return false;
-            }
-
-            return stack.Count() == 0;
-        }
-
-        public static ListNode MergeTwoLists(this ListNode list1, ListNode list2)
-        {
-            if (list1 == null && list2 == null) return null;
-            if (list1 == null) return list2;
-            if (list2 == null) return list1;
-
-            ListNode head; ListNode temp;
-            if (list1.val < list2.val)
-            {
-                head = temp = new ListNode(list1.val);
-                list1 = list1.next;
-            }
-            else
-            {
-                head = temp = new ListNode(list2.val);
-                list2 = list2.next;
-            }
-
-            while (list1 != null && list2 != null)
-            {
-                if (list1.val > list2.val)
-                {
-                    temp.next = new ListNode(list2.val);
-                    list2 = list2.next;
-                }
-                else
-                {
-                    temp.next = new ListNode(list1.val);
-                    list1 = list1.next;
-                }
-                temp = temp.next;
-            }
-
-            while (list1 != null)
-            {
-                temp.next = new ListNode(list1.val);
-                list1 = list1.next;
-                temp = temp.next;
-            }
-
-            while (list2 != null)
-            {
-                temp.next = new ListNode(list2.val);
-                list2 = list2.next;
-                temp = temp.next;
-            }
-
-            return head;
-        }
-
-        public static int RemoveDuplicates(int[] nums)
-        {
-            var k = 0;
-            for (var i = 0; i < nums.Length; i++)
-            {
-                if (i < nums.Length - 1 && nums[i] == nums[i + 1])
-                {
-                    continue;
-                }
-
-                nums[k] = nums[i];
-                k++;
-            }
-
-            return k;
-        }
-
-        public static int RemoveElement(this int[] nums, int val)
-        {
-            var k = 0;
-            for (var i = 0; i < nums.Length; i++)
-            {
-                if (nums[i] == val)
-                {
-                    continue;
-                }
-
-                nums[k] = nums[i];
-                k++;
-            }
-
-            return k;
-        }
-
         public static int StrStr(this string haystack, string needle)
         {
             if (haystack == null || needle == null) return -1;
@@ -358,32 +155,6 @@ namespace ProblemsLibrary.Problems
             }
 
             return -1;
-        }
-
-        public static int SearchInsert(this int[] nums, int target)
-        {
-            var ans = -1;
-            var l = 0;
-            var r = nums.Length - 1;
-            while (r >= l)
-            {
-                var mid = l + (r - l) / 2;
-
-                if (nums[mid] == target) return mid;
-
-                if (target < nums[mid])
-                {
-                    r = mid - 1;
-                    ans = mid;
-                }
-                else
-                {
-                    ans = mid + 1;
-                    l = mid + 1;
-                }
-            }
-
-            return ans;
         }
 
         public static int MaxSubArray(this int[] nums)
@@ -403,165 +174,6 @@ namespace ProblemsLibrary.Problems
             }
 
             return max_so_far;
-        }
-
-        public static int LengthOfLastWord(this string s)
-        {
-            if (s == null)
-            {
-                return 0;
-            }
-
-            var k = 0;
-            for (var i = s.Length - 1; i >= 0; i--)
-            {
-                if (s[i] == ' ')
-                {
-                    if (k > 0)
-                    {
-                        return k;
-                    }
-
-                    continue;
-                }
-
-                k++;
-            }
-
-            return k;
-        }
-
-        public static int[] PlusOne(this int[] digits)
-        {
-            var last = digits.Length - 1;
-            if (digits[last] < 9)
-            {
-                digits[last]++;
-                return digits;
-            }
-
-            if (digits.Length == 1)
-            {
-                return new int[] { 1, 0 };
-            }
-
-            digits[last] = 0;
-            for (var i = last - 1; i >= 0; i--)
-            {
-                if (digits[i] < 9)
-                {
-                    digits[i]++;
-                    return digits;
-                }
-
-                digits[i] = 0;
-            }
-
-            var res = new int[digits.Length + 1];
-            res[0] = 1;
-            for (var i = 1; i < res.Length; i++)
-            {
-                res[i] = digits[i - 1];
-            }
-            return res;
-        }
-
-        public static string AddBinary(string a, string b)
-        {
-            var stack = new Stack<char>();
-            var i = a.Length - 1;
-            var j = b.Length - 1;
-            var prev = false;
-            while (i > -1 && j > -1)
-            {
-                var res = CalculateSum(a[i], b[j], prev);
-                if (res == 0)
-                {
-                    stack.Push('0');
-                }
-                else if (res == 1)
-                {
-                    stack.Push('1');
-                }
-                else if (res == 2)
-                {
-                    stack.Push('1');
-                    prev = false;
-                }
-                else if (res == 3)
-                {
-                    stack.Push('0');
-                    prev = true;
-                }
-                else
-                {
-                    stack.Push('1');
-                    prev = true;
-                }
-
-                i--;
-                j--;
-            }
-
-            while (i >= 0)
-            {
-                var res = CalculateSum(a[i], '0', prev);
-                if (res == 0)
-                {
-                    stack.Push('0');
-                }
-                else if (res == 1)
-                {
-                    stack.Push('1');
-                }
-                else if (res == 2)
-                {
-                    stack.Push('1');
-                    prev = false;
-                }
-                else
-                {
-                    stack.Push('0');
-                    prev = true;
-                }
-                i--;
-            }
-
-            while (j >= 0)
-            {
-                var res = CalculateSum('0', b[j], prev);
-                if (res == 0)
-                {
-                    stack.Push('0');
-                }
-                else if (res == 1)
-                {
-                    stack.Push('1');
-                }
-                else if (res == 2)
-                {
-                    stack.Push('1');
-                    prev = false;
-                }
-                else if (res == 3)
-                {
-                    stack.Push('1');
-                    prev = true;
-                }
-                else
-                {
-                    stack.Push('0');
-                    prev = true;
-                }
-                j--;
-            }
-
-            if (prev)
-            {
-                stack.Push('1');
-            }
-
-            return new string(stack.ToArray());
         }
 
         private static int CalculateSum(char a, char b, bool prev)
@@ -589,195 +201,6 @@ namespace ProblemsLibrary.Problems
             return 1;
         }
 
-        public static int MySqrt(int x)
-        {
-            if (x == 0) return 0;
-
-            double init = x;
-            double y = 1;
-
-            double e = 0.0001;
-            while (init - y > e)
-            {
-                init = (init + y) / 2;
-                y = x / init;
-            }
-
-            return (int)init;
-        }
-
-        public static int ClimbStairs(int n)
-        {
-            if (n == 1) return 1;
-
-            var ways = new int[n + 1];
-            ways[0] = 1;
-            ways[1] = 1;
-
-            for (var i = 2; i < ways.Length; i++)
-            {
-                ways[i] = ways[i - 1] + ways[i - 2];
-            }
-
-            return ways[n];
-        }
-
-        public static ListNode DeleteDuplicates(this ListNode head)
-        {
-            if (head == null) return null;
-            if (head.next == null) return head;
-
-            var curr = head;
-            while (curr != null && curr.next != null)
-            {
-                if (curr.val == curr.next.val)
-                {
-                    curr.next = curr.next.next;
-                    continue;
-                }
-
-                curr = curr.next;
-            }
-
-            return head;
-        }
-
-        public static void Merge(this int[] nums1, int m, int[] nums2, int n)
-        {
-            if (n == 0) return;
-
-            if (m == 0 && n > 0)
-            {
-                nums1 = new int[n];
-                for (var l = 0; l < n; l++)
-                {
-                    nums1[l] = nums2[l];
-                }
-                return;
-            }
-
-            var i = m - 1;
-            var j = n - 1;
-            for (var k = nums1.Length - 1; k >= 0; k--)
-            {
-                if (i < 0 || j < 0)
-                {
-                    break;
-                }
-
-                if (nums1[i] > nums2[j])
-                {
-                    nums1[k] = nums1[i];
-                    i--;
-                }
-                else
-                {
-                    nums1[k] = nums2[j];
-                    j--;
-                }
-            }
-        }
-
-        public static IList<int> InorderTraversal(this TreeNode root)
-        {
-            var res = new List<int>();
-            if (root == null) return res;
-
-            res = InOrder(res, root);
-
-            return res;
-        }
-
-        private static List<int> InOrder(List<int> order, TreeNode node)
-        {
-            if (node == null) return order;
-
-            order = InOrder(order, node.left);
-            order.Add(node.val);
-            order = InOrder(order, node.right);
-
-            return order;
-        }
-
-        public static bool IsSameTree(this TreeNode p, TreeNode q)
-        {
-            if (p == null && q == null) return true;
-
-            if (p == null || q == null) return false;
-
-            if (p.val != q.val) return false;
-
-            return p.right.IsSameTree(q.right) && p.left.IsSameTree(q.left);
-        }
-
-        public static bool IsSymmetric(this TreeNode root)
-        {
-            if (root == null) return true;
-
-            return IsMirror(root, root);
-        }
-
-        private static bool IsMirror(TreeNode left, TreeNode right)
-        {
-            if (left == null && right == null) return true;
-
-            if (left == null || right == null) return false;
-
-            if (left.val != right.val) return false;
-
-            return IsMirror(left.left, right.right) && IsMirror(left.right, right.left);
-        }
-
-        public static int MaxDepth(this TreeNode root)
-        {
-            if (root == null) return 0;
-
-            var depth = 1;
-
-            if (root.left == null && root.right == null) return depth;
-
-            var leftDepth = 0;
-            if (root.left != null) leftDepth = root.left.MaxDepth();
-
-            var rightDepth = 0;
-            if (root.right != null) rightDepth = root.right.MaxDepth();
-
-            depth += leftDepth > rightDepth ? leftDepth : rightDepth;
-            return depth;
-        }
-
-        public static TreeNode SortedArrayToBST(this int[] nums)
-        {
-            if (nums == null || nums.Length == 0) return null;
-
-            if (nums.Length == 1) return new TreeNode(nums[0]);
-
-            return ConstructTreeNode(nums, 0, nums.Length - 1);
-        }
-
-        private static TreeNode ConstructTreeNode(int[] nums, int start, int end)
-        {
-            if (start > end)
-            {
-                return null;
-            }
-
-            int mid = (start + end) / 2;
-            var node = new TreeNode(nums[mid])
-            {
-                left = ConstructTreeNode(nums, start, mid - 1),
-
-                right = ConstructTreeNode(nums, mid + 1, end)
-            };
-
-            return node;
-        }
-
-        public static bool IsBalanced(this TreeNode root)
-        {
-            return checkHeight(root, new Height());
-        }
-
         private static bool checkHeight(TreeNode root, Height height)
         {
             if (root == null)
@@ -798,52 +221,6 @@ namespace ProblemsLibrary.Problems
             return Math.Abs(rightHeight - leftHeight) <= 1 && l && r;
         }
 
-        public static int MinDepth(this TreeNode root)
-        {
-            if (root == null) return 0;
-
-            if (root.left == null && root.right == null) return 1;
-
-            if (root.left == null || root.right == null) return Math.Max(MinDepth(root.left), MinDepth(root.right)) + 1;
-
-            return Math.Min(MinDepth(root.left), MinDepth(root.right)) + 1;
-        }
-
-        public static bool HasPathSum(this TreeNode root, int targetSum)
-        {
-            if (root == null) return false;
-
-            targetSum -= root.val;
-            if (root.left == null && root.right == null) return targetSum == 0;
-
-            return root.left.HasPathSum(targetSum) || root.right.HasPathSum(targetSum);
-        }
-
-        public static IList<IList<int>> Generate(int numRows)
-        {
-            var list = new List<IList<int>>();
-            for (var i = 0; i < numRows; i++)
-            {
-                var curr = new int[i + 1];
-                if (curr.Length > 1)
-                {
-                    curr[0] = list[i - 1][0];
-                    curr[curr.Length - 1] = list[i - 1][list[i - 1].Count - 1];
-                    for (var j = 1; j < curr.Length - 1; j++)
-                    {
-                        curr[j] = list[i - 1][j - 1] + list[i - 1][j];
-                    }
-                }
-                else
-                {
-                    curr[0] = 1;
-                }
-
-                list.Add(curr);
-            }
-            return list;
-        }        
-
         public static int Trap(int[] height)
         {
             if (height.Length == 0) return 0;
@@ -853,7 +230,7 @@ namespace ProblemsLibrary.Problems
             var leftMax = height[i];
             var rightMax = height[j];
             var res = 0;
-            
+
             // [4,2,0,3,2,5]
             while (i <= j) // i: 6, j: 5, res: 9
             {
@@ -866,8 +243,8 @@ namespace ProblemsLibrary.Problems
                 else
                 {
                     rightMax = Math.Max(rightMax, height[j]);
-                    res += rightMax - height[j]; 
-                    j--;                    
+                    res += rightMax - height[j];
+                    j--;
                 }
             }
             return res;
@@ -904,27 +281,10 @@ namespace ProblemsLibrary.Problems
             return dp[i];
         }
 
-        public static int MaxProfit(int[] prices)
-        {
-            if (prices == null || prices.Length < 2) return 0;
-
-            var min = prices[0];
-            var max = int.MinValue;
-
-            for (var i = 0; i < prices.Length; i++)
-            {
-                int diff = prices[i] - min;
-                if (diff > max) max = diff;
-                if (prices[i] < min) min = prices[i];
-            }
-
-            return max;
-        }
-
         public static bool ContainsDuplicate(int[] nums)
         {
             var hashSet = new HashSet<int>();
-            for (var i = 0;i < nums.Length; i++)
+            for (var i = 0; i < nums.Length; i++)
             {
                 if (hashSet.Contains(nums[i]))
                 {
@@ -939,10 +299,10 @@ namespace ProblemsLibrary.Problems
         {
             var left = new int[nums.Length];
             left[0] = 1;
-            
+
             var right = new int[nums.Length];
             right[right.Length - 1] = 1;
-            
+
             var res = new int[nums.Length];
 
             for (var i = 1; i < nums.Length; i++)
@@ -950,7 +310,7 @@ namespace ProblemsLibrary.Problems
                 left[i] = nums[i - 1] * left[i - 1];
             }
 
-            for (var j=nums.Length - 2; j >= 0; j--)
+            for (var j = nums.Length - 2; j >= 0; j--)
             {
                 right[j] = nums[j + 1] * right[j + 1];
             }
@@ -967,7 +327,7 @@ namespace ProblemsLibrary.Problems
         {
             if (nums.Length == 1) return nums[0];
 
-            var res = nums[0]; 
+            var res = nums[0];
             var max = res;
             var min = res;
             for (var i = 1; i < nums.Length; i++)
@@ -1000,12 +360,12 @@ namespace ProblemsLibrary.Problems
 
             if (nums.First() < nums.Last()) return nums[0];
 
-            var left = 0; 
+            var left = 0;
             var right = nums.Length - 1;
             while (left < right) // left: 0, right: 4
             {
                 var mid = (left + right) / 2; // mid: 2
-                if (nums[mid-1] > nums[mid]) // mid-1: 1, mid: 2
+                if (nums[mid - 1] > nums[mid]) // mid-1: 1, mid: 2
                 {
                     return nums[mid];
                 }
@@ -1092,7 +452,7 @@ namespace ProblemsLibrary.Problems
                 //nums[i]: 0
 
                 if (i > 0 && nums[i] == nums[i - 1]) continue;
-                
+
                 var low = i + 1; //4, nums[low]: 1
                 var high = nums.Length - 1; // 5, nums[high]: 2
                 var sum = -nums[i]; //1
@@ -1140,8 +500,418 @@ namespace ProblemsLibrary.Problems
                 if (height[left] < height[right]) left++;
                 else right--;
             }
-            
+
             return max;
         }
-    }    
+
+        public static int GetSum(int a, int b)
+        {
+            while (b != 0)
+            {
+                int temp = (a & b) << 1;
+                a ^= b;
+                b = temp;
+            }
+            return a;
+        }
+
+        public static bool IsPalindrome(this int x)
+        {
+            int revert = 0;
+            for (var i = x; i > 0; i /= 10)
+            {
+                revert = revert * 10 + i % 10;
+            }
+
+            return x == revert;
+        }
+
+        public static int RomanToInt(this string s)
+        {
+            if (s == null) return 0;
+
+            var dict = new Dictionary<char, int>
+            {
+                {'I', 1 },
+                {'V', 5 },
+                {'X', 10 },
+                {'L', 50 },
+                {'C', 100 },
+                {'D', 500 },
+                {'M', 1000 },
+            };
+
+            if (s.Length == 1) return dict[s[0]];
+            // IV IX XL CM
+            // 4 9 40 900
+            var res = dict[s[s.Length - 1]];
+            char prev = s[s.Length - 1];
+            for (var i = s.Length - 2; i >= 0; i--)
+            {
+                // MCMXCIV
+                if (dict[s[i]] < dict[prev])
+                {
+                    res -= dict[s[i]];
+                }
+                else
+                {
+                    res += dict[s[i]];
+                }
+
+                prev = s[i];
+            }
+            return res;
+        }
+
+        public static string LongestCommonPrefix(this string[] strs)
+        {
+            if (strs.Length == 1) return strs[0];
+            if (strs.Contains("")) return "";
+
+            var sb = new StringBuilder(strs[0]);
+            for (var i = 1; i < strs.Length; i++)
+            {
+                var temp = new StringBuilder();
+                var j = 0;
+                while (j < Math.Min(sb.Length, strs[i].Length) && sb[j] == strs[i][j])
+                {
+                    temp.Append(sb[j++]);
+                }
+                sb.Clear();
+                sb.Append(temp.ToString());
+            }
+            return sb.ToString();
+        }
+
+        public static bool IsValid(this string s)
+        {
+            // ( ) { } [ ]
+            if (s.Length == 1 ||
+                s[0] == ')' ||
+                s[0] == '}' ||
+                s[0] == ']' ||
+                s[s.Length - 1] == '(' ||
+                s[s.Length - 1] == '{' ||
+                s[s.Length - 1] == '[')
+                return false;
+
+            var stack = new Stack<char>();
+            foreach (var c in s)
+            {
+                if (c == '(' || c == '{' || c == '[') stack.Push(c);
+
+                if (stack.Count == 0 ||
+                    (c == ')' && stack.Peek() != '(') ||
+                    (c == '}' && stack.Peek() != '{') ||
+                    (c == ']' && stack.Peek() != '['))
+                    return false;
+
+                if ((c == ')' && stack.Peek() == '(') ||
+                    (c == '}' && stack.Peek() == '{') ||
+                    (c == ']' && stack.Peek() == '['))
+                {
+                    stack.Pop();
+                    continue;
+                }
+            }
+
+            return stack.Count == 0;
+        }
+
+        public static ListNode MergeTwoLists(this ListNode list1, ListNode list2)
+        {
+            if (list1 == null) return list2;
+            if (list2 == null) return list1;
+
+            var arr = new List<int>();
+            while (list1?.val > int.MinValue && list2?.val > int.MinValue)
+            {
+                if (list1.val > list2.val)
+                {
+                    arr.Add(list2.val);
+                    list2 = list2.next;
+                }
+                else
+                {
+                    arr.Add(list1.val);
+                    list1 = list1.next;
+                }
+            }
+
+            while (list1?.val > int.MinValue)
+            {
+                arr.Add(list1.val);
+                list1 = list1.next;
+            }
+
+            while (list2?.val > int.MinValue)
+            {
+                arr.Add(list2.val);
+                list2 = list2.next;
+            }
+
+            var res = new ListNode(arr[arr.Count - 1]);
+            for (var i = arr.Count - 2; i >= 0; i--)
+            {
+                res = new ListNode(arr[i], res);
+            }
+
+            return res;
+        }
+
+        public static int RemoveDuplicates(this int[] nums)
+        {
+            if (nums.Length == 1) return 1;
+
+            // 0 0 1 1 1 2 2 3 3 4
+            // prev_i = 2
+            // nums[prev_i] = 1
+            // i = 3
+            // nums[i] = 1
+            var k = 1;
+            var prev_i = 0;
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == nums[prev_i]) continue;
+
+                if (i - prev_i > 1)
+                {
+                    nums[++prev_i] = nums[i];
+                }
+                else
+                {
+                    prev_i = i;
+                }
+
+                k++;
+            }
+            return k;
+        }
+
+        public static int RemoveElement(this int[] nums, int val)
+        {
+            var k = 0;
+            for (var i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == val)
+                {
+                    continue;
+                }
+
+                nums[k] = nums[i];
+                k++;
+            }
+
+            return k;
+        }
+
+        public static int SearchInsert(this int[] nums, int target)
+        {
+            // 1,3,5,6
+            // 7
+
+            return Search(nums, target, 0, nums.Length - 1);
+        }
+
+        private static int Search(this int[] nums, int x, int low, int high)
+        {
+            if (low > high) return low;
+
+            var mid = (low + high) / 2;
+            if (x == nums[mid]) return mid;
+
+            if (x > nums[mid]) return nums.Search(x, mid + 1, high);
+            return nums.Search(x, low, mid - 1);
+        }
+
+        public static int LengthOfLastWord(this string s)
+        {
+            var _s = s.Split();
+            for (var i = _s.Length - 1; i > 0; i--)
+            {
+                if (!string.IsNullOrEmpty(_s[i]))
+                    return _s[i].Length;
+            }
+            return _s[0].Length;
+        }
+
+        public static int[] PlusOne(this int[] digits)
+        {
+            var toExtend = false;
+            for (var i = digits.Length - 1; i >= 0; i--)
+            {
+                if (digits[i] == 9 && (toExtend || i == digits.Length - 1))
+                {
+                    digits[i] = 0;
+                    toExtend = true;
+                    continue;
+                }
+
+                if (toExtend)
+                {
+                    digits[i]++;
+                    return digits;
+                }
+
+                if (i == digits.Length - 1)
+                {
+                    digits[digits.Length - 1]++;
+                    return digits;
+                }
+            }
+            var newDigits = new int[digits.Length + 1];
+            newDigits[0] = 1;
+            return newDigits;
+        }
+
+        public static string AddBinary(string a, string b)
+        {
+            if (a == "0") return b;
+            if (b == "0") return a;
+
+            var next = false;
+            var res = new StringBuilder(a.Length > b.Length ? a : b);
+            var add = new StringBuilder(a.Length > b.Length ? b : a);
+            var diff = res.Length - add.Length;
+            for (var i = res.Length - 1; i >= 0; i--)
+            {
+                // 1 1 1 1
+                // 1 1 1 1
+                //       |
+                // false
+                if (i - diff < 0)
+                {
+                    if (res[i] == '1' && next)
+                    {
+                        res[i] = '0';
+                        continue;
+                    }
+                    if (res[i] == '0' && next)
+                    {
+                        res[i] = '1';
+                        next = false;
+                    }
+                    break;
+                }
+
+                if (res[i] == '1' && add[i - diff] == '1')
+                {
+                    if (next)
+                    {
+                        res[i] = '1';
+                        continue;
+                    }
+                    res[i] = '0';
+                    next = true;
+                    continue;
+                }
+
+                if (res[i] == '1' || add[i - diff] == '1')
+                {
+                    if (next)
+                    {
+                        res[i] = '0';
+                        continue;
+                    }
+                    res[i] = '1';
+                    continue;
+                }
+
+                if (next)
+                {
+                    res[i] = '1';
+                    next = false;
+                }
+            }
+            if (next)
+            {
+                var sb = new StringBuilder();
+                sb.Append('1');
+                sb.Append(res.ToString());
+                return sb.ToString();
+            }
+            return res.ToString();
+        }
+
+        public static int MySqrt(int x)
+        {
+            if (x < 2) return x;
+
+            var low = 0;
+            var high = x;
+            while (low <= high)
+            {
+                int temp = (high + low) / 2;
+                if ((long)temp * temp > x) high = temp - 1;
+                else low = temp + 1;
+            }
+            return high;
+        }
+
+        public static int ClimbStairs(int n)
+        {
+            if (n == 1) return n;
+
+            var ways = new int[n + 1];
+            ways[0] = 1;
+            ways[1] = 1;
+            for (var i = 2; i < ways.Length; i++)
+            {
+                ways[i] = ways[i - 1] + ways[i - 2];
+            }
+
+            return ways[n];
+        }
+
+        public static IList<IList<int>> Generate(int numRows)
+        {
+            var res = new List<IList<int>>();
+            for (var i = 0; i < numRows; i++)
+            {
+                var cur = new List<int>();
+                for (var j = 0; j < i; j++)
+                {
+                    if (j == 0 || j == i - 1) cur.Add(1);
+                    else cur.Add(res[i - 2][j - 1] + res[i - 2][j]);
+                }
+                if (cur.Any()) res.Add(cur);
+            }
+            return res;
+        }
+
+        public static IList<int> GetRow(int rowIndex)
+        {
+            var res = new List<IList<int>>();
+            for (var i = 0; i < rowIndex+2; i++)
+            {
+                var cur = new List<int>();
+                for (var j = 0; j < i; j++)
+                {
+                    if (j == 0 || j == i - 1) cur.Add(1);
+                    else cur.Add(res[i - 2][j - 1] + res[i - 2][j]);
+                }
+                if (cur.Any()) res.Add(cur);
+            }
+            return res.Last();
+        }
+
+        public static int MaxProfit(int[] prices)
+        {
+            if (prices.Length == 2) return prices[1] - prices[0] > 0 ? prices[1] - prices[0] : 0;
+            var low = prices[0];
+            var diff = 0;
+            for (var i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] - low > diff)
+                {
+                    diff = prices[i] - low;
+                }
+                else if (prices[i] < low)
+                {
+                    low = prices[i];
+                }
+            }
+            return diff > 0 ? diff : 0;
+        }
+    }
 }

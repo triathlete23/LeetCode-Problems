@@ -15,7 +15,7 @@ namespace ProblemsLibrary.Problems
             {
                 count[a[i] + 1]++;
             }
-                
+
             for (var r = 0; r < rightBound; r++)
             {
                 count[r + 1] += count[r];
@@ -98,7 +98,7 @@ namespace ProblemsLibrary.Problems
                 maxSum += A[i] * i;
                 allElemsSum += A[i];
             }
-            
+
             var prev = maxSum;
             for (var i = 1; i < A.Length; i++)
             {
@@ -115,18 +115,59 @@ namespace ProblemsLibrary.Problems
 
         public static int[] TwoSum(int[] nums, int target)
         {
-            var dict = new Dictionary<int, int>();
-            for (var i = 0; i < nums.Length; i++)
-            {
-                if (dict.ContainsKey(nums[i]))
-                {
-                    return new int[] { dict[nums[i]], i };
-                }
+            if (nums.Length < 2) return nums;
 
-                dict[target - nums[i]] = i;
+            var dict = new Dictionary<int, int>();
+            // 2,7,11,15
+            // target 9
+            // i = 1
+            // nums[i] = 7
+            // [2] -> 0            
+            // [7] -> 1
+            for (var i = 0; i < nums.Length; i++)
+            {                
+                if (dict.ContainsKey(target - nums[i]))
+                {
+                    return new int[2] { dict[target - nums[i]], i };
+                }
+                dict[nums[i]] = i;
             }
 
-            return new int[] { 0, 1 };
+            return nums;
         }
+
+        public static void Merge(this int[] nums1, int m, int[] nums2, int n)
+        {
+            if (n == 0) return;
+
+            if (m == 0)
+            {
+                for (var i = 0; i < n; i++)
+                {
+                    nums1[i] = nums2[i];
+                }
+                return;
+            }
+
+            var j = 0;
+            for (var i = nums1.Length - 1; i >= 0; i--)
+            {
+                if (nums1[i] != 0 || j == nums2.Length) break;
+                nums1[i] = nums2[j++];
+            }
+
+            for (var i = 0; i < nums1.Length - 1; i++)
+            {
+                for (j = 0; j < nums1.Length - i - 1; j++)
+                {
+                    if (nums1[j] > nums1[j + 1])
+                    {
+                        (nums1[j+1], nums1[j]) = (nums1[j], nums1[j+1]);
+                    }
+                }
+            }
+        }
+
+
     }
 }
