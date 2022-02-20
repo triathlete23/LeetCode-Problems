@@ -1485,5 +1485,47 @@ namespace Tests
             var res = OtherProblems.ThreeSum(new int[] { 0, 0, 0 });
             Assert.IsTrue(expectedResult.All(arr => res.Any(el => el.Count == arr.Count && el.All(x => arr.Contains(x)))));
         }
+
+        [TestMethod]
+        public void MaxAreaTest()
+        {
+            Assert.AreEqual(49, OtherProblems.MaxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest1()
+        {
+            Assert.AreEqual(1, OtherProblems.MaxArea(new int[] { 1, 1 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest2()
+        {
+            Assert.AreEqual(4, OtherProblems.MaxArea(new int[] { 1, 2, 4, 3 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest3()
+        {
+            Assert.AreEqual(17, OtherProblems.MaxArea(new int[] { 2, 3, 4, 5, 18, 17, 6 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest4()
+        {
+            Assert.AreEqual(2, OtherProblems.MaxArea(new int[] { 1,2,1 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest5()
+        {
+            Assert.AreEqual(16, OtherProblems.MaxArea(new int[] { 4, 3, 2, 1, 4 }));
+        }
+
+        [TestMethod]
+        public void MaxAreaTest6()
+        {
+            Assert.AreEqual(49, OtherProblems.MaxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
+        }
     }
 }

@@ -1121,5 +1121,27 @@ namespace ProblemsLibrary.Problems
 
             return res;
         }
+
+        public static int MaxArea(int[] height)
+        {
+            if (height.Length == 2) return height.Min();
+
+            // 0, 1, 2, 3, 4, 5, 6, 7, 8
+            // 1, 8, 6, 2, 5, 4, 8, 3, 7            
+            var left = 0; //left: 0, value: 1
+            var right = height.Length - 1; // right: 8, value: 7            
+            var max = int.MinValue;
+            while (left < right)
+            {
+                var smaller = Math.Min(height[left], height[right]);
+
+                max = Math.Max(max, smaller * (right - left));
+
+                if (height[left] < height[right]) left++;
+                else right--;
+            }
+            
+            return max;
+        }
     }    
 }
