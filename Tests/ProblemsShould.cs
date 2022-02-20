@@ -1527,5 +1527,17 @@ namespace Tests
         {
             Assert.AreEqual(49, OtherProblems.MaxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
         }
+
+        [TestMethod]
+        public void GetSumTest()
+        {
+            Assert.AreEqual(3, OtherProblems.GetSum(1, 2));
+        }
+
+        [TestMethod]
+        public void GetSumTest1()
+        {
+            Assert.AreEqual(5, OtherProblems.GetSum(2, 3));
+        }
     }
 }
